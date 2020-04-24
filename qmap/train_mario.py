@@ -17,12 +17,14 @@ parser.add_argument('--seed', help='random number generator seed', type=int, def
 parser.add_argument('--path', default='qmap_results')
 parser.add_argument('--level', help='game level', default='1.1')
 parser.add_argument('--load', help='path to the agent to load', default=None)
+parser.add_argument('--n_steps', type=float, default=5e6)
 boolean_flag(parser, 'dqn', default=True)
 boolean_flag(parser, 'qmap', default=True)
 boolean_flag(parser, 'render', help='play the videos', default=False)
 args = parser.parse_args()
 
-n_steps = int(5e6)
+# n_steps = int(5e6)
+n_steps = int(args.n_steps)
 env = CustomSuperMarioAllStarsEnv(screen_ratio=4, coords_ratio=8, use_color=False, use_rc_frame=False, stack=3, frame_skip=2, action_repeat=4, level=args.level)
 coords_shape = env.coords_shape
 set_global_seeds(args.seed)

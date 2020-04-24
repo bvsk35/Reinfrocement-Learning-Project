@@ -25,12 +25,14 @@ parser.add_argument('--batch', type=int, default=32)
 parser.add_argument('--gamma', type=float, default=0.9)
 parser.add_argument('--model', default='convdeconv1')
 parser.add_argument('--target', type=int, default=1000)
+parser.add_argument('--n_steps', type=float, default=1e8)
 boolean_flag(parser, 'dueling', default=True)
 boolean_flag(parser, 'norm', default=True)
 boolean_flag(parser, 'double', default=True)
 boolean_flag(parser, 'render', default=False)
 args = parser.parse_args()
-n_steps = int(1e8)
+# n_steps = int(1e8)
+n_steps = int(args.n_steps)
 train_level = 'level1'
 test_levels = ['level1', 'level2', 'level3']
 
