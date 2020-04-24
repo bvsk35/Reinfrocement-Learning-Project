@@ -213,6 +213,7 @@ class Q_Map_DQN_Agent:
         dqn_target_net_update_freq=500,
         dqn_grad_norm_clip=100,
         dqn_double_q=True,
+        dqn_model_save_freq=100000,
         # Q-Map:
         q_map_model=None,
         q_map_random_schedule=None,
@@ -527,7 +528,8 @@ class Q_Map_DQN_Agent:
             self.q_map.update_target()
 
         # save the session
-        if (self.use_dqn or self.use_q_map) and (self.t+1) % 100000 == 0:
+        # if (self.use_dqn or self.use_q_map) and (self.t+1) % 100000 == 0:
+        if (self.use_dqn or self.use_q_map) and (self.t+1) % dqn_model_save_freq == 0:
             file_name = self.tensorflow_path  + '/step_' + str(self.t+1) + '.ckpt'
             print('saving tensorflow session to', file_name)
             self.tf_saver.save(tf.get_default_session(), file_name)
