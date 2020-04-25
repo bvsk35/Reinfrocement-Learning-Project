@@ -4,7 +4,7 @@ from baselines.common.misc_util import boolean_flag
 from baselines.common.schedules import LinearSchedule
 import baselines.common.tf_util as U
 from datetime import datetime
-from gym.envs.classic_control import rendering
+# from gym.envs.classic_control import rendering
 import matplotlib.pyplot as plt
 import numpy as np
 import os
