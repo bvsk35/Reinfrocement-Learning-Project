@@ -70,8 +70,8 @@ for level in test_levels:
     test_obs.append(np.load(obs_path))
     test_qmaps.append(np.load(gt_path))
     image_indexes.append(np.linspace(300, len(test_obs[-1]) - 300, n_images).astype(int))
-if args.render:
-    viewer = rendering.SimpleImageViewer(maxwidth=2500)
+# if args.render:
+#     viewer = rendering.SimpleImageViewer(maxwidth=2500)
 
 # Create the agent.
 
@@ -191,8 +191,8 @@ for t in range(n_steps // q_map.batch_size + 1):
         img = np.concatenate(all_images, axis=0)
         # toimage(img, cmin=0, cmax=255).save('{}/images/{}.png'.format(path, t))
         Image.fromarray(img).save('{}/images/{}.png'.format(path, t))
-        if args.render:
-            img = np.repeat(np.repeat(img, 3, 0), 3, 1)
-            viewer.imshow(img)
+        # if args.render:
+        #     img = np.repeat(np.repeat(img, 3, 0), 3, 1)
+        #     viewer.imshow(img)
         print(t*args.batch, 'Losses:', *losses)
         loss_logger.log(t, *losses)
