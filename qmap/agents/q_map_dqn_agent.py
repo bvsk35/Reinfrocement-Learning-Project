@@ -242,6 +242,7 @@ class Q_Map_DQN_Agent:
         self.learning_starts = learning_starts
         self.train_freq = train_freq
         self.print_freq = print_freq
+        self.dqn_model_save_freq = dqn_model_save_freq
 
         agent_name += '-train' + str(train_freq)
 
@@ -529,7 +530,7 @@ class Q_Map_DQN_Agent:
 
         # save the session
         # if (self.use_dqn or self.use_q_map) and (self.t+1) % 100000 == 0:
-        if (self.use_dqn or self.use_q_map) and (self.t+1) % dqn_model_save_freq == 0:
+        if (self.use_dqn or self.use_q_map) and (self.t+1) % self.dqn_model_save_freq == 0:
             file_name = self.tensorflow_path  + '/step_' + str(self.t+1) + '.ckpt'
             print('saving tensorflow session to', file_name)
             self.tf_saver.save(tf.get_default_session(), file_name)
