@@ -8,7 +8,8 @@ from gym.envs.classic_control import rendering
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from scipy.misc import toimage
+# from scipy.misc import toimage
+from PIL import Image
 import tensorflow as tf
 
 from qmap.agents.models import ConvDeconvMap, MlpMap
@@ -189,6 +190,7 @@ for t in range(n_steps // q_map.batch_size + 1):
             all_images.append(np.concatenate((ob_images, true_images, pred_images), axis=0))
         img = np.concatenate(all_images, axis=0)
         toimage(img, cmin=0, cmax=255).save('{}/images/{}.png'.format(path, t))
+        Image.fromarray(img).save('{}/images/{}.png'.format(path, t))
         if args.render:
             img = np.repeat(np.repeat(img, 3, 0), 3, 1)
             viewer.imshow(img)

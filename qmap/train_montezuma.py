@@ -16,7 +16,8 @@ parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFo
 parser.add_argument('--seed', help='RNG seed', type=int, default=0)
 parser.add_argument('--path', default='qmap_results')
 parser.add_argument('--load', help='path to the agent to load', default=None)
-parser.add_argument('--n_steps', type=float, default=5e6)
+parser.add_argument('--n_steps', help='no. of training Epochs', type=float, default=5e6)
+parser.add_argument('--model_save_freq', help='model save frequncy', type=int, default=100000)
 boolean_flag(parser, 'dqn', default=True)
 boolean_flag(parser, 'qmap', default=True)
 boolean_flag(parser, 'render', help='play the videos', default=False)
@@ -101,6 +102,7 @@ agent = Q_Map_DQN_Agent(
     dqn_batch_size=32,
     dqn_target_net_update_freq=1000,
     dqn_grad_norm_clip=1000,
+    dqn_model_save_freq=args.model_save_freq,
     # Q-Map
     q_map_model=q_map_model,
     q_map_random_schedule=q_map_random_schedule,
