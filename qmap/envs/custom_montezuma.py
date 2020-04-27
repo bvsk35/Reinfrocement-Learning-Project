@@ -3,7 +3,8 @@ import gym
 from gym import Env, spaces, utils
 from gym.utils import seeding
 import numpy as np
-from scipy.misc import imresize
+# from scipy.misc import imresize
+from skimage.transform import resize
 
 from qmap.utils.lazy_frames import LazyFrames
 
@@ -109,11 +110,13 @@ class CustomMontezumaEnv(Env, utils.EzPickle):
         if self.use_color:
             img = np.zeros((224, 160, 3)) # padding
             img[7:-7] = self.ale.getScreenRGB()
-            img = imresize(img, (self.screen_height, self.screen_width), interp='bilinear')
+            # img = imresize(img, (self.screen_height, self.screen_width), interp='bilinear')
+            img = resize(img, (self.screen_height, self.screen_width))
         else:
             img = np.zeros((224, 160, 1)) # padding
             img[7:-7] = self.ale.getScreenGrayscale()
-            img = imresize(img[:,:,0], (self.screen_height, self.screen_width), interp='bilinear')[:,:,None]
+            # img = imresize(img[:,:,0], (self.screen_height, self.screen_width), interp='bilinear')[:,:,None]
+            img = resize(img, (self.screen_height, self.screen_width))[:,:,None]
         return img
 
     def _get_ram(self):
