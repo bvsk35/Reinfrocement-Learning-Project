@@ -116,7 +116,7 @@ class CustomMontezumaEnv(Env, utils.EzPickle):
             img = np.zeros((224, 160, 1)) # padding
             img[7:-7] = self.ale.getScreenGrayscale()
             # img = imresize(img[:,:,0], (self.screen_height, self.screen_width), interp='bilinear')[:,:,None]
-            img = resize(img, (self.screen_height, self.screen_width))[:,:,None]
+            img = resize(img[:,:,0], (self.screen_height, self.screen_width))[:,:,None]
         return img
 
     def _get_ram(self):
